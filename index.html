@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 25 Web Series</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-table-header: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --border-color: #e5e5e7;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --hover-bg: #f0f0f2;
+            --accent: #f5c518;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1d;
+            --bg-secondary: #2c2c2e;
+            --bg-table-header: #3a3a3c;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --border-color: #3a3a3c;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --hover-bg: #3a3a3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 40px 20px;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .imdb-badge {
+            background: var(--accent);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-secondary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: var(--border-color);
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        [data-theme="dark"] .toggle-switch {
+            background: var(--accent);
+        }
+
+        [data-theme="dark"] .toggle-switch::after {
+            left: 27px;
+        }
+
+        .toggle-icon {
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent) 0%, #e6b800 100%);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(245, 197, 24, 0.4);
+        }
+
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .table-container {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 18px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        th {
+            background-color: var(--bg-table-header);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        tbody tr {
+            transition: var(--transition);
+        }
+
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .title-cell {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .rating-cell {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--accent) 0%, #e6b800 100%);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .rating-cell::before {
+            content: '★';
+        }
+
+        .index-cell {
+            font-weight: 700;
+            color: var(--text-secondary);
+            font-size: 14px;
+            min-width: 50px;
+        }
+
+        .year-cell, .episodes-cell {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            th, td {
+                padding: 14px 16px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <div class="title-section">
+                    <span class="imdb-badge">IMDb</span>
+                    <h1>Top 25 Web Series</h1>
+                </div>
+                <p class="subtitle">The highest-rated TV shows of all time</p>
+            </div>
+            <div class="header-actions">
+                <a href="top_25_webseries.csv" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download CSV
+                </a>
+                <div class="theme-toggle" onclick="toggleTheme()">
+                    <span class="toggle-icon">☀️</span>
+                    <div class="toggle-switch"></div>
+                    <span class="toggle-icon">🌙</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Release Year</th>
+                        <th>Episodes</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td class="index-cell">1</td>
+                        <td class="title-cell">Breaking Bad</td>
+                        <td class="year-cell">2008–2013</td>
+                        <td class="episodes-cell">62 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">2</td>
+                        <td class="title-cell">Planet Earth II</td>
+                        <td class="year-cell">2016</td>
+                        <td class="episodes-cell">6 eps</td>
+                        <td><span class="rating-cell">TV-G</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">3</td>
+                        <td class="title-cell">Planet Earth</td>
+                        <td class="year-cell">2006</td>
+                        <td class="episodes-cell">11 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">4</td>
+                        <td class="title-cell">Band of Brothers</td>
+                        <td class="year-cell">2001</td>
+                        <td class="episodes-cell">10 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">5</td>
+                        <td class="title-cell">Chernobyl</td>
+                        <td class="year-cell">2019</td>
+                        <td class="episodes-cell">5 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">6</td>
+                        <td class="title-cell">The Wire</td>
+                        <td class="year-cell">2002–2008</td>
+                        <td class="episodes-cell">60 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">7</td>
+                        <td class="title-cell">Avatar: The Last Airbender</td>
+                        <td class="year-cell">2005–2008</td>
+                        <td class="episodes-cell">62 eps</td>
+                        <td><span class="rating-cell">TV-Y7-FV</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">8</td>
+                        <td class="title-cell">The Sopranos</td>
+                        <td class="year-cell">1999–2007</td>
+                        <td class="episodes-cell">86 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">9</td>
+                        <td class="title-cell">Blue Planet II</td>
+                        <td class="year-cell">2017</td>
+                        <td class="episodes-cell">7 eps</td>
+                        <td><span class="rating-cell">TV-G</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">10</td>
+                        <td class="title-cell">Cosmos: A Spacetime Odyssey</td>
+                        <td class="year-cell">2014</td>
+                        <td class="episodes-cell">13 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">11</td>
+                        <td class="title-cell">Cosmos</td>
+                        <td class="year-cell">1980</td>
+                        <td class="episodes-cell">13 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">12</td>
+                        <td class="title-cell">Our Planet</td>
+                        <td class="year-cell">2019–2023</td>
+                        <td class="episodes-cell">12 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">13</td>
+                        <td class="title-cell">Game of Thrones</td>
+                        <td class="year-cell">2011–2019</td>
+                        <td class="episodes-cell">74 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">14</td>
+                        <td class="title-cell">Bluey</td>
+                        <td class="year-cell">2018– </td>
+                        <td class="episodes-cell">195 eps</td>
+                        <td><span class="rating-cell">TV-Y</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">15</td>
+                        <td class="title-cell">The World at War</td>
+                        <td class="year-cell">1973–1974</td>
+                        <td class="episodes-cell">26 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">16</td>
+                        <td class="title-cell">Fullmetal Alchemist: Brotherhood</td>
+                        <td class="year-cell">2009–2010</td>
+                        <td class="episodes-cell">68 eps</td>
+                        <td><span class="rating-cell">TV-14</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">17</td>
+                        <td class="title-cell">Attack on Titan</td>
+                        <td class="year-cell">2013–2023</td>
+                        <td class="episodes-cell">98 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">18</td>
+                        <td class="title-cell">Life</td>
+                        <td class="year-cell">2009</td>
+                        <td class="episodes-cell">11 eps</td>
+                        <td><span class="rating-cell">TV-G</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">19</td>
+                        <td class="title-cell">The Last Dance</td>
+                        <td class="year-cell">2020</td>
+                        <td class="episodes-cell">10 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">20</td>
+                        <td class="title-cell">The Twilight Zone</td>
+                        <td class="year-cell">1959–1964</td>
+                        <td class="episodes-cell">156 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">21</td>
+                        <td class="title-cell">Rick and Morty</td>
+                        <td class="year-cell">2013– </td>
+                        <td class="episodes-cell">85 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">22</td>
+                        <td class="title-cell">The Vietnam War</td>
+                        <td class="year-cell">2017</td>
+                        <td class="episodes-cell">10 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">23</td>
+                        <td class="title-cell">Sherlock</td>
+                        <td class="year-cell">2010–2017</td>
+                        <td class="episodes-cell">15 eps</td>
+                        <td><span class="rating-cell">TV-14</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">24</td>
+                        <td class="title-cell">Batman: The Animated Series</td>
+                        <td class="year-cell">1992–1995</td>
+                        <td class="episodes-cell">85 eps</td>
+                        <td><span class="rating-cell">TV-PG</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="index-cell">25</td>
+                        <td class="title-cell">Better Call Saul</td>
+                        <td class="year-cell">2015–2022</td>
+                        <td class="episodes-cell">63 eps</td>
+                        <td><span class="rating-cell">TV-MA</span></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <p class="footer">Data sourced from IMDb • Updated automatically</p>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
